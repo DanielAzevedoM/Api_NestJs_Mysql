@@ -33,15 +33,17 @@ export class UserService {
 
         const findUser = await this.userRepository.findOne(id)
 
-        console.log(user)
-        
+        if(!findUser){
+            return null;
+        }
+
         const userUpdate = {
             ...findUser,
             email: user.newEmail,
             password: user.newPassword
         }
 
-        return this.userRepository.save(userUpdate);
+         return this.userRepository.save(userUpdate);
         
     }
 
@@ -49,7 +51,10 @@ export class UserService {
         const findUser = await this.userRepository.findOne(id);
 
         if(!findUser){
-            console.log("User not exists!")
+            console.log("User not exists")
+
+            return
+            
         }
 
         return this.userRepository.remove(findUser);

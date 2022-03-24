@@ -8,11 +8,11 @@ export class verifyEmailExistsConstraint implements ValidatorConstraintInterface
 
 constructor(private readonly userService: UserService){}
 
-validate(email: any, args: ValidationArguments) {
-    return this.userService.verifyEmailExists(email).then(user => {
-      if (user) return false;
+  async validate(email: any, args: ValidationArguments ) {
+    const user = await this.userService.verifyEmailExists(email);
+    if (user)
+      return false;
       return true;
-    });
   }
 }
 

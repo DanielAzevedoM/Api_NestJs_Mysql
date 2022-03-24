@@ -1,4 +1,4 @@
-import {  IsEmail, IsNotEmpty } from "class-validator";
+import {   IsEmail, IsNotEmpty, validate } from "class-validator";
 import { IsUserAlreadyExist } from "src/validators/user/verifyEmailExists.validator";
 import {  PrimaryGeneratedColumn } from "typeorm";
 
@@ -19,8 +19,9 @@ export class CreateUserDto {
 //Falta fazer validação de email.
 export class UpdateUserDto {
 
-    id:number
+    id:number;
 
+    @IsUserAlreadyExist({ message: `Email already exists`})
     newEmail: string;
   
     newPassword: string;
