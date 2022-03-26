@@ -10,7 +10,6 @@ export class UserController {
 
     @Post()
     async create(@Body() createUserDto: CreateUserDto){
-        console.log(createUserDto)
         return this.userService.create(createUserDto)
     }
 
@@ -26,7 +25,6 @@ export class UserController {
 
     @Put(':id')
     update(@Param() param, @Body() updateUserDto: UpdateUserDto) {
-        console.log(updateUserDto)
        return this.userService.update(param, updateUserDto);
     }
 

@@ -1,6 +1,7 @@
-import {   IsEmail, IsNotEmpty, validate } from "class-validator";
+import { Exclude } from "class-transformer";
+import { IsEmail, IsNotEmpty } from "class-validator";
 import { IsUserAlreadyExist } from "src/validators/user/verifyEmailExists.validator";
-import {  PrimaryGeneratedColumn } from "typeorm";
+import { PrimaryGeneratedColumn } from "typeorm";
 
 export class CreateUserDto {
     
@@ -11,6 +12,7 @@ export class CreateUserDto {
     @IsUserAlreadyExist({ message: `Email already exists`})
     email: string
 
+    @Exclude({ toPlainOnly: true })
     @IsNotEmpty({ message: 'Password required'})
     password: string;
 }
@@ -25,7 +27,5 @@ export class UpdateUserDto {
     newEmail: string;
   
     newPassword: string;
-
-
 
 }

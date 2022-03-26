@@ -1,4 +1,4 @@
-export class User {
+export interface User {
     id: number;
     email:string;
     password: string;
@@ -7,7 +7,7 @@ export class User {
 }
 
 //Perguntar se isso é correto.
-export class updateUser {
+export interface updateUser {
 
     id: number;
     newEmail?:string;
