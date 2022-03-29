@@ -8,7 +8,8 @@ import { UserModule } from './modules/user/user.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forRootAsync({
+  imports: [
+    TypeOrmModule.forRootAsync({
     useFactory: async () =>
       Object.assign(await getConnectionOptions(), {
         autoLoadEntities: false,
