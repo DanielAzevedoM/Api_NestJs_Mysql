@@ -1,6 +1,5 @@
 export interface updateUser {
-
-    id: string;
+    id:string;
     newEmail?:string;
     newPassword?: string;
 

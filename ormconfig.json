@@ -7,4 +7,5 @@
     "database": "kunlateksql",
     "entities": ["dist/**/*.entity{.ts,.js}"],
     "synchronize": true
-}
+    
+ }

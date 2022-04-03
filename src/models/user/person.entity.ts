@@ -1,15 +1,15 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm';
 import { User } from './user.entity';
 
 
 @Entity()
 export class Person {
   
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
-  name: string
+  name: string;
 
   @Column()
   gender: string;
@@ -20,6 +20,7 @@ export class Person {
   @OneToOne(type => User, person => Person)
   user: User;
 
+ 
 }
 
 
