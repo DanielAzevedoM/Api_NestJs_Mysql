@@ -12,10 +12,15 @@ export class PersonService {
     @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>
     ){}
 
-    async create(param, person: Person): Promise<PersonEntity>{
-       const findUser = this.userRepository.find(param.id)
-
-       return
+     create(person: Person): Promise<PersonEntity>{
+     
+       return this.personRepository.save(person)
        
     }  
+
+    linkUser(id: string, person: Person){
+
+    }
+
+
 }

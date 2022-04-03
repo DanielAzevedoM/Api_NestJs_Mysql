@@ -7,6 +7,7 @@ export class CreateUserDto {
    
     id: string;
     
+    
     @IsEmail({}, { message: 'Invalid email'})
     @IsUserAlreadyExist({ message: `Email already exists`})
     email: string

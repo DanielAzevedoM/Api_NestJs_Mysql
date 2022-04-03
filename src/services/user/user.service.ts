@@ -4,6 +4,7 @@ import { User as UserEntity} from '../../models/user/user.entity';
 import { User } from '../../interfaces/user/user.interface';
 import { updateUser } from 'src/interfaces/user/update-user.interface'
 import { InjectRepository } from '@nestjs/typeorm';
+import { Person } from 'src/models/user/person.entity';
 
 
 
@@ -33,7 +34,7 @@ export class UserService {
     }
 
     async update(id: string, user: updateUser): Promise<UserEntity>{
-        const findUser = await this.userRepository.findOne({where: {id} })
+        const findUser = await this.userRepository.findOne(id)
 
         if(!findUser){
             return null;
@@ -43,6 +44,21 @@ export class UserService {
             ...findUser,
             email: user.newEmail,
             password: user.newPassword
+        }
+
+         return this.userRepository.save(userUpdate);    
+    }
+
+    async updatePerson(id: string, person: Person): Promise<UserEntity>{
+        const findUser = await this.userRepository.findOne(id)
+
+        if(!findUser){
+            return null;
+        }
+
+        const userUpdate = {
+            ...findUser,
+            person: person
         }
 
          return this.userRepository.save(userUpdate);    
