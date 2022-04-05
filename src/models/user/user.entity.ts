@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Person } from './person.entity';
+import { Person } from '../person/person.entity';
 
 
 @Entity() 
@@ -18,6 +18,9 @@ export class User  {
   @JoinColumn()
   @OneToOne(type => Person, user => User)
   person: Person
+
+  @Column({ nullable: true })
+  personId: string
 }
 
 

@@ -14,6 +14,7 @@ import { UserModule } from './modules/user/user.module';
           autoLoadEntities: false,
         })
     }),
+
     UserModule, 
   ],
   controllers: [AppController],
