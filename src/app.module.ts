@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { HtppExceptionFilter } from './common/filters/htpp-exception-filter';
+import { PersonModule } from './modules/person/person.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -16,6 +17,7 @@ import { UserModule } from './modules/user/user.module';
     }),
 
     UserModule, 
+    PersonModule
   ],
   controllers: [AppController],
   providers: [

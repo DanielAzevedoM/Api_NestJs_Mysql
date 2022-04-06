@@ -1,5 +1,3 @@
-
-
 export class CreatePersonDto {
    
   id: string;

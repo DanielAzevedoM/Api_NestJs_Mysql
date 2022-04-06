@@ -12,7 +12,7 @@ export class CreateUserDto {
     @IsUserAlreadyExist({ message: `Email already exists`})
     email: string
 
-    @Exclude({ toPlainOnly: true })
+    //@Exclude({ toPlainOnly: true })
     @IsNotEmpty({ message: 'Password required'})
     password: string;
     

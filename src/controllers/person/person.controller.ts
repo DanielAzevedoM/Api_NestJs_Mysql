@@ -1,15 +1,13 @@
-import { Body, Controller, Delete,Get,Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete,Get,Param, Post, Put } from '@nestjs/common';
 import { CreatePersonDto } from 'src/dtos/person/person.dto';
-import { Person } from 'src/interfaces/person/person.interface';
+import { UpdatePersonDto } from 'src/dtos/person/person.update.dto';
 import { PersonService } from 'src/services/person/person.service';
-import { UserService  } from 'src/services/user/user.service';
+
 
 @Controller(':userId/person/')
 export class PersonController {
 
-    constructor(
-        private readonly personService: PersonService,
-        private readonly userService: UserService){}
+    constructor( private readonly personService: PersonService ){}
 
     @Post()
     async create(@Param() param,@Body() createPersonDto: CreatePersonDto){
@@ -22,19 +20,14 @@ export class PersonController {
     }
 
     @Get(':id')
-    async findOne(@Param() params) {
+    findOne(@Param() params) {
         return this.personService.findOne(params);
     }
 
-    // @Get(':id')
-    //  findOne(@Param() params) {
-    //     return this.userService.findOne(params.id);
-    // }
-
-    // @Put(':id')
-    // update(@Param() param, @Body() updateUserDto: UpdateUserDto) {
-    //    return this.userService.update(param, updateUserDto);
-    // }
+    @Put(':id')
+    update(@Param() params, @Body() UpdatePersonDto: UpdatePersonDto) {
+       return this.personService.update(params, UpdatePersonDto);
+    }
 
 
     @Delete(':id')
