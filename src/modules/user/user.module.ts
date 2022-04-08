@@ -12,7 +12,7 @@ import { Person } from 'src/models/person/person.entity';
     imports: [TypeOrmModule.forFeature([User, Person])],
     controllers: [UserController],
     providers: [UserService, verifyEmailExistsConstraint],
-    exports: [UserService]
+    exports: []
 
     
   })

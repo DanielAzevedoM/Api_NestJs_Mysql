@@ -4,7 +4,7 @@ import { UpdatePersonDto } from 'src/dtos/person/person.update.dto';
 import { PersonService } from 'src/services/person/person.service';
 
 
-@Controller(':userId/person/')
+@Controller('user/:userId/person/')
 export class PersonController {
 
     constructor( private readonly personService: PersonService ){}

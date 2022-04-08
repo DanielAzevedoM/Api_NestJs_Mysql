@@ -1,4 +1,5 @@
-import { Column, Entity, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Adress } from '../adress/adress.entity';
 import { User } from '../user/user.entity';
 
 
@@ -23,6 +24,8 @@ export class Person {
   @OneToOne(type => User, person => Person)
   user: User;
 
+  @OneToMany(type => Adress, person => Person)
+  adress: Adress;
  
 }
 

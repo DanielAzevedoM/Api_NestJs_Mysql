@@ -17,10 +17,10 @@ export class User  {
 
   @JoinColumn()
   @OneToOne(type => Person, user => User)
-  person: Person
+  person: Person;
 
   @Column({ nullable: true })
-  personId: string
+  personId: string;
 }
 
 

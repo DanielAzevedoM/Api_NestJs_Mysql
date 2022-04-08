@@ -26,19 +26,17 @@ export class UserService {
     async findOne(id: string): Promise<UserEntity>{
         const findUser = await this.userRepository.findOne(id);
 
-        if(!findUser){
-            console.log("User not exists!")
-        }
+        if(!findUser) return null;
 
         return findUser;
     }
 
     async update(id: string, user:  UpdateUser): Promise<UserEntity>{
+
+        console.log(id)
         const findUser = await this.userRepository.findOne(id)
 
-        if(!findUser){
-            return null
-        }
+        if(!findUser) return null
 
         const userUpdate = {
             ...findUser,
@@ -53,11 +51,7 @@ export class UserService {
     async remove(id: string): Promise<UserEntity>{
         const findUser = await this.userRepository.findOne(id);
 
-        if(!findUser){
-            console.log("User not exists")
-
-            return
-        }
+        if(!findUser) return null;
 
         return this.userRepository.remove(findUser);
     }

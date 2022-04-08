@@ -15,7 +15,7 @@ export class UserController {
     }
 
     @Get()
-    async findAll(): Promise<User[]> {
+    async findAll(){
       return this.userService.findAll();
     }
 
@@ -25,8 +25,8 @@ export class UserController {
     }
 
     @Put(':id')
-    update(@Param() param, @Body() updateUserDto: UpdateUserDto) {
-       return this.userService.update(param, updateUserDto);
+    update(@Param() params, @Body() updateUserDto: UpdateUserDto) {
+       return this.userService.update(params.id, updateUserDto);
     }
 
 

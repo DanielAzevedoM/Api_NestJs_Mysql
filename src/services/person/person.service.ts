@@ -11,7 +11,7 @@ import { UpdatePerson } from 'src/interfaces/person/person.update.interface';
 export class PersonService {
     constructor(
     @InjectRepository(PersonEntity) private readonly personRepository: Repository<PersonEntity>,
-    @InjectRepository(UserEntity) private userRepository: Repository<UserEntity>
+    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>
     ){}
 
 	create(person: Person): Promise<PersonEntity>{
@@ -38,6 +38,7 @@ export class PersonService {
 	
 		const findPerson = await this.personRepository.findOne(findUser.personId);
 		
+		if(params.id !== findUser.personId) return null;
 		if(!findUser) return null;
 		if(!findPerson) return null;
 
@@ -53,9 +54,9 @@ export class PersonService {
 
 	async findOne(params): Promise<PersonEntity>{
 		const findUser = await this.userRepository.findOne(params.userId);
-	
 		const findPerson = await this.personRepository.findOne(findUser.personId);
 
+		if(params.id !== findUser.personId) return null;
 		if(!findUser) return null;
 		if(!findPerson) return null;
 	
@@ -67,6 +68,8 @@ export class PersonService {
 
 		const findPerson = await this.personRepository.findOne(findUser.personId);
 
+
+		if(params.id !== findUser.personId) return null;
        	if(!findUser) return null;
 		if(!findPerson) return null;
 
