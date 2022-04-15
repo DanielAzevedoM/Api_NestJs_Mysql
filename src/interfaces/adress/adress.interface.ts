@@ -1,11 +1,11 @@
 export interface Adress {
    
     id: string;
-    adress: string
+    adress: string;
     city: string;
     state: string;
     postalCode: number;
-    country: string
+    country: string;
   
   }
   

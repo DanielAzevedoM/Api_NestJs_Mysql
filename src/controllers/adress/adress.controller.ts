@@ -10,8 +10,8 @@ export class AdressController {
 
     @Post()
     async create(@Param() params,@Body() createAdressDto: CreateAdressDto){
- 
         const adress = await this.adressService.create(params, createAdressDto);
+
         const adressUpdated =  await this.adressService.updateFk(params, adress);
 
         return adressUpdated;
@@ -31,7 +31,6 @@ export class AdressController {
     update(@Param() params, @Body() updateAdressDto: UpdateAdressDto) {
        return this.adressService.update(params, updateAdressDto);
     }
-
 
     @Delete(':id')
     remove(@Param() params) {
