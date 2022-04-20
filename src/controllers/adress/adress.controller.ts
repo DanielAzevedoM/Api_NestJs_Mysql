@@ -3,13 +3,14 @@ import { CreateAdressDto } from 'src/dtos/adress/adress.dto';
 import { UpdateAdressDto } from 'src/dtos/adress/adress.update.dto';
 import { AdressService } from 'src/services/adress/adress.service';
 
-@Controller('user/:userId/person/:personId/adress/')
+@Controller('user/person/:personId/adress/')
 export class AdressController {
 
-  constructor( private readonly adressService: AdressService ){}
+    constructor( private readonly adressService: AdressService ){}
 
     @Post()
     async create(@Param() params,@Body() createAdressDto: CreateAdressDto){
+
         const adress = await this.adressService.create(params, createAdressDto);
 
         const adressUpdated =  await this.adressService.updateFk(params, adress);
@@ -19,7 +20,7 @@ export class AdressController {
 
     @Get()
     findAll(@Param() params) {
-        return this.adressService.findAll(params);
+        return this.adressService.findAllByPersonId(params);
     }
 
     @Get(':id')

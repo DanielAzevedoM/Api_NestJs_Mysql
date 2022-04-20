@@ -42,9 +42,9 @@ export class PersonService {
 	
 		const findPerson = await this.personRepository.findOne(findUser.personId);
 		
-		if(findPerson.id !== findUser.personId) return null;
 		if(!findUser) return null;
 		if(!findPerson) return null;
+		if(findPerson.id !== findUser.personId) return null;
 
 		const userUpdate = {
 			...findUser,
@@ -74,9 +74,9 @@ export class PersonService {
 		const findPerson = await this.personRepository.findOne(findUser.personId);
 
 
-		if(findPerson.id !== findUser.personId) return null;
-       	if(!findUser) return null;
+		if(!findUser) return null;
 		if(!findPerson) return null;
+		if(findPerson.id !== findUser.personId) return null;
 
         const personUpdate = {
             ...findPerson,
@@ -85,7 +85,7 @@ export class PersonService {
 			birthday: person.newBirthday
         }
 
-         return this.personRepository.save(personUpdate);    
+        return this.personRepository.save(personUpdate);    
     }
 	
 

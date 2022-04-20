@@ -5,6 +5,7 @@ import { getConnectionOptions } from 'typeorm';
 import { AppController } from './app.controller';
 import { HtppExceptionFilter } from './common/filters/htpp-exception-filter';
 import { AdressModule } from './modules/adress/adress.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { PersonModule } from './modules/person/person.module';
 import { UserModule } from './modules/user/user.module';
 
@@ -19,7 +20,8 @@ import { UserModule } from './modules/user/user.module';
 
     UserModule, 
     PersonModule,
-    AdressModule
+    AdressModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [

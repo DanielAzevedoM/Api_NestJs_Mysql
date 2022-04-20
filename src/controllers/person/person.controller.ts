@@ -4,7 +4,7 @@ import { UpdatePersonDto } from 'src/dtos/person/person.update.dto';
 import { PersonService } from 'src/services/person/person.service';
 
 
-@Controller('user/:userId/person')
+@Controller('user/person')
 export class PersonController {
 
     constructor( private readonly personService: PersonService ){}
@@ -29,7 +29,6 @@ export class PersonController {
     update(@Param() params, @Body() UpdatePersonDto: UpdatePersonDto) {
        return this.personService.update(params, UpdatePersonDto);
     }
-
 
     @Delete()
     remove(@Param() params) {

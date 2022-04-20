@@ -47,7 +47,6 @@ export class UserService {
          return this.userRepository.save(userUpdate);    
     }
 
-
     async remove(id: string): Promise<UserEntity>{
         const findUser = await this.userRepository.findOne(id);
 
