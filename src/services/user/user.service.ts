@@ -5,9 +5,6 @@ import { User } from '../../interfaces/user/user.interface';
 import { UpdateUser } from 'src/interfaces/user/user.update.interface'
 import { InjectRepository } from '@nestjs/typeorm';
 
-
-
-
 @Injectable()
 export class UserService {
     constructor(
@@ -24,7 +21,7 @@ export class UserService {
     }
 
     async findOne(id: string): Promise<UserEntity>{
-        const findUser = await this.userRepository.findOne(id);
+        const findUser = await this.userRepository.findOne({id: id});
 
         if(!findUser) return null;
 
@@ -32,9 +29,7 @@ export class UserService {
     }
 
     async update(id: string, user:  UpdateUser): Promise<UserEntity>{
-
-        console.log(id)
-        const findUser = await this.userRepository.findOne(id)
+        const findUser = await this.userRepository.findOne({id: id});
 
         if(!findUser) return null
 
@@ -48,7 +43,7 @@ export class UserService {
     }
 
     async remove(id: string): Promise<UserEntity>{
-        const findUser = await this.userRepository.findOne(id);
+        const findUser = await this.userRepository.findOne({id: id});
 
         if(!findUser) return null;
 
@@ -56,7 +51,14 @@ export class UserService {
     }
 
     async verifyEmailExists(email: string): Promise<UserEntity>{
-        const findUser = await this.userRepository.findOne({ where: { email}}) ;
+        const findUser = await this.userRepository.findOne({ email: email}) ;
+
+        return findUser;
+    }
+
+    async findOneGuard(email: string){
+ 
+        const findUser = await this.userRepository.findOne({email});
 
         return findUser;
     }

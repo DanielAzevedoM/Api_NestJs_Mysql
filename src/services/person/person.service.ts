@@ -14,8 +14,8 @@ export class PersonService {
     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>
     ){}
 
-	async create(param, person: Person): Promise<PersonEntity>{
-		const findUser = await this.userRepository.findOne(param.userId);	
+	async create(params, person: Person): Promise<PersonEntity>{
+		const findUser = await this.userRepository.findOne({ id: params.userId });	
 
 		if(!findUser) return null;
 
@@ -23,7 +23,7 @@ export class PersonService {
     }  
 
     async updateFk(id: string, person: Person): Promise<UserEntity>{
-		const findUser = await this.userRepository.findOne(id);
+		const findUser = await this.userRepository.findOne({ id: id });
 
 		if(!findUser) return null;
 
@@ -36,15 +36,14 @@ export class PersonService {
 		return this.userRepository.save(userUpdate);    
     }
 
-
     async remove(params): Promise<PersonEntity>{
-		const findUser = await this.userRepository.findOne(params.userId);
-	
-		const findPerson = await this.personRepository.findOne(findUser.personId);
+		const findUser = await this.userRepository.findOne({ id: params.userId });
+		
+		const findPerson = await this.personRepository.findOne({ id: findUser.personId });
 		
 		if(!findUser) return null;
 		if(!findPerson) return null;
-		if(findPerson.id !== findUser.personId) return null;
+		
 
 		const userUpdate = {
 			...findUser,
@@ -53,14 +52,14 @@ export class PersonService {
 
 		await this.userRepository.save(userUpdate);
 
-		return  this.personRepository.remove(findPerson)
+		return this.personRepository.remove(findPerson)
 	}
 
 	async findOne(params): Promise<PersonEntity>{
-		const findUser = await this.userRepository.findOne(params.userId);
-
-		const findPerson = await this.personRepository.findOne(findUser.personId);
-
+		const findUser = await this.userRepository.findOne({ id: params.userId });
+	
+		const findPerson = await this.personRepository.findOne({ id: findUser.personId });
+		
 		if(findPerson.id !== findUser.personId) return null;
 		if(!findUser) return null;
 		if(!findPerson) return null;
@@ -69,11 +68,10 @@ export class PersonService {
 	}
 
 	async update(params, person: UpdatePerson): Promise<PersonEntity>{
-		const findUser = await this.userRepository.findOne(params.userId);
-
-		const findPerson = await this.personRepository.findOne(findUser.personId);
-
-
+		const findUser = await this.userRepository.findOne({ id: params.userId });
+	
+		const findPerson = await this.personRepository.findOne({ id: findUser.personId });
+		
 		if(!findUser) return null;
 		if(!findPerson) return null;
 		if(findPerson.id !== findUser.personId) return null;
@@ -87,8 +85,24 @@ export class PersonService {
 
         return this.personRepository.save(personUpdate);    
     }
-	
 
+	async updateSelfie(params, selfie: string){
+		const findUser = await this.userRepository.findOne({ id: params.userId });
+
+		const findPerson = await this.personRepository.findOne({ id: findUser.personId });
+
+
+		if(!findUser) return null;
+		if(!findPerson) return null;
+
+		const updateSelfie = {
+			...findPerson,
+			selfie: selfie
+		}
+
+		return this.personRepository.save(updateSelfie)
+	}
+	
 }
 
 

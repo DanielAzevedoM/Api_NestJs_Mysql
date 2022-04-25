@@ -4,23 +4,26 @@ import { IsUserAlreadyExist } from "src/validators/user/verifyEmailExists.valida
 
 export class CreateUserDto {
     
-   
     id: string;
-    
     
     @IsEmail({}, { message: 'Invalid email'})
     @IsUserAlreadyExist({ message: `Email already exists`})
-    email: string
+    email: string;
 
     //@Exclude({ toPlainOnly: true })
     @IsNotEmpty({ message: 'Password required'})
     password: string;
-    
-
-    
-
-    
+        
 }
+
+export class UserDto {
+
+    email: string;
+
+    password: string;
+
+}
+
 
 
 

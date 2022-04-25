@@ -16,7 +16,7 @@ export class AdressService {
     ){}
 
     async create(params, adress: Adress): Promise<AdressEntity>{
-        const findPerson = await this.personRepository.findOne(params.personId)
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
 		if(!findPerson) return null;
        
@@ -24,7 +24,7 @@ export class AdressService {
     }
     
     async updateFk(params, adress: Adress): Promise<AdressEntity> {   
-        const findPerson = await this.personRepository.findOne(params.personId)
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
         const updateFk = {
             ...adress,
@@ -36,7 +36,7 @@ export class AdressService {
     }
 
     async findAllByPersonId(params): Promise<AdressEntity[]>{
-        const findPerson = await this.personRepository.findOne(params.personId)
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
         const findAdress = await this.adressRepository.find({ personId: findPerson.id })
       
@@ -46,9 +46,9 @@ export class AdressService {
     }
 
     async findOne(params): Promise<AdressEntity>{
-        const findPerson = await this.personRepository.findOne(params.personId)
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
-        const findAdress = await this.adressRepository.findOne(params.id)
+        const findAdress = await this.adressRepository.findOne({ id: params.id})
 
 		if(!findPerson) return null;
         
@@ -56,9 +56,9 @@ export class AdressService {
     }
 
     async update(params, adress: UpdateAdress): Promise<AdressEntity>{ 
-        const findPerson = await this.personRepository.findOne(params.personId);
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
-        const findAdress = await this.adressRepository.findOne(params.id);
+        const findAdress = await this.adressRepository.findOne({ id: params.id})
 
 		if(!findPerson) return null;
 
@@ -75,10 +75,10 @@ export class AdressService {
     }
 
     async remove(params): Promise<AdressEntity>{
-        const findPerson = await this.personRepository.findOne(params.personId);
+        const findPerson = await this.personRepository.findOne({ id: params.personId})
 
-        const findAdress = await this.adressRepository.findOne(params.id);
-
+        const findAdress = await this.adressRepository.findOne({ id: params.id})
+        
 		if(!findPerson) return null;
 
         return this.adressRepository.remove(findAdress);
